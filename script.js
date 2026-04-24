@@ -77,8 +77,72 @@ if (marqueeTrack) {
 const modal = document.querySelector("[data-modal]");
 const openButton = document.querySelector("[data-modal-open]");
 const closeButtons = document.querySelectorAll("[data-modal-close]");
+const callbackForm = document.querySelector("[data-callback-form]");
+const callbackFields = callbackForm ? Array.from(callbackForm.querySelectorAll("input[name]")) : [];
+
+const resetCallbackFormState = () => {
+  callbackForm?.classList.remove("is-submitted");
+  callbackFields.forEach((field) => {
+    field.classList.remove("is-invalid");
+    const errorNode = callbackForm.querySelector(`[data-error-for="${field.name}"]`);
+    if (errorNode) {
+      errorNode.textContent = "";
+    }
+  });
+};
+
+const validators = {
+  name: (value) => {
+    if (!value.trim()) {
+      return "Please enter your name.";
+    }
+    if (value.trim().length < 2) {
+      return "Name must be at least 2 characters.";
+    }
+    return "";
+  },
+  email: (value) => {
+    if (!value.trim()) {
+      return "Please enter your email address.";
+    }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(value.trim())) {
+      return "Please enter a valid email address.";
+    }
+    return "";
+  },
+  mobile: (value) => {
+    if (!value.trim()) {
+      return "Please enter your mobile number.";
+    }
+    const digitsOnly = value.replace(/\D/g, "");
+    if (digitsOnly.length !== 10) {
+      return "Mobile number must be 10 digits.";
+    }
+    return "";
+  },
+};
+
+const validateField = (field) => {
+  const validator = validators[field.name];
+  if (!validator || !callbackForm) {
+    return true;
+  }
+
+  const errorMessage = validator(field.value);
+  const errorNode = callbackForm.querySelector(`[data-error-for="${field.name}"]`);
+
+  field.classList.toggle("is-invalid", Boolean(errorMessage));
+
+  if (errorNode) {
+    errorNode.textContent = errorMessage;
+  }
+
+  return !errorMessage;
+};
 
 const openModal = () => {
+  resetCallbackFormState();
   modal.hidden = false;
   document.body.style.overflow = "hidden";
 };
@@ -104,5 +168,23 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && modal && !modal.hidden) {
     closeModal();
   }
+});
+
+callbackFields.forEach((field) => {
+  field.addEventListener("input", () => {
+    validateField(field);
+  });
+});
+
+callbackForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const isFormValid = callbackFields.every((field) => validateField(field));
+
+  if (!isFormValid) {
+    return;
+  }
+
+  callbackForm.classList.add("is-submitted");
+  callbackForm.reset();
 });
 /* Popup Section JS End Here */

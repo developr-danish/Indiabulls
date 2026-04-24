@@ -1020,8 +1020,19 @@ input {
   color: var(--ink-dark);
   outline: none;
 }
+
+.field-group input.is-invalid {
+  border-bottom-color: #d94b4b;
+}
 .field-group span{
   font-size: 0.9rem;
+}
+
+.field-error {
+  min-height: 16px;
+  color: #d94b4b;
+  font-size: 0.78rem;
+  line-height: 1.3;
 }
 
 .checkbox-row {
@@ -1054,6 +1065,25 @@ input {
   font-weight: 700;
   text-transform: uppercase;
   cursor: pointer;
+}
+
+.callback-success-message {
+  display: none;
+  padding: 16px 18px;
+  border: 1px solid rgba(155, 177, 31, 0.35);
+  background: rgba(188, 213, 49, 0.12);
+  color: var(--ink-dark);
+  text-align: center;
+}
+
+.callback-success-message p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.callback-form.is-submitted .callback-success-message {
+  display: block;
 }
 /* Popup Section CSS End Here */
 

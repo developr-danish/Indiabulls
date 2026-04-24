@@ -335,20 +335,23 @@
 
       <h2 id="callback-title" class="modal-title">Request a call back</h2>
 
-      <form class="callback-form">
+      <form class="callback-form" data-callback-form>
         <label class="field-group">
           <span>Name*</span>
-          <input type="text" name="name" autocomplete="name">
+          <input type="text" name="name" autocomplete="name" required>
+          <small class="field-error" data-error-for="name"></small>
         </label>
 
         <label class="field-group">
           <span>E-Mail ID*</span>
-          <input type="email" name="email" autocomplete="email">
+          <input type="email" name="email" autocomplete="email" required>
+          <small class="field-error" data-error-for="email"></small>
         </label>
 
         <label class="field-group">
           <span>Mobile*</span>
-          <input type="tel" name="mobile" autocomplete="tel">
+          <input type="tel" name="mobile" autocomplete="tel" required>
+          <small class="field-error" data-error-for="mobile"></small>
         </label>
 
         <label class="checkbox-row">
@@ -357,6 +360,10 @@
         </label>
 
         <button class="submit-button" type="submit">Submit</button>
+
+        <div class="callback-success-message" aria-live="polite">
+          <p>Thank you! We have received your details and will contact you shortly.</p>
+        </div>
       </form>
     </div>
   </div>
