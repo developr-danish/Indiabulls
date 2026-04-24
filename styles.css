@@ -997,7 +997,7 @@ input {
   font-size: clamp(2.1rem, 2vw, 2.1rem);
   font-weight: 600;
   text-align: center;
-  color: var(--modal-line);
+  color: var(--accent-deep);
 }
 
 .callback-form {
@@ -1015,7 +1015,7 @@ input {
   width: 100%;
   padding: 0 0 12px;
   border: 0;
-  border-bottom: 1px solid var(--modal-line);
+  border-bottom: 1px solid var(--accent-deep);
   background: transparent;
   color: var(--ink-dark);
   outline: none;
@@ -1035,7 +1035,7 @@ input {
   width: 15px;
   height: 15px;
   margin: 0;
-  accent-color: var(--modal-line);
+  accent-color: var(--accent-deep);
 }
 
 .checkbox-row span{
@@ -1048,9 +1048,8 @@ input {
   min-height: 50px;
   padding: 0 24px;
   border: 0;
-  background: var(--modal-line);
+  background: var(--accent-deep);
   color: #fff;
-  font-family: "Cormorant Garamond", serif;
   font-size: 1.1rem;
   font-weight: 700;
   text-transform: uppercase;
